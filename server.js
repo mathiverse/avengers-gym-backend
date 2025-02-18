@@ -94,10 +94,25 @@ function formatTrainingFocus(type) {
 // Helper function to format time slot
 function formatTimeSlot(slot) {
   const slots = {
-    'morning': 'Morning (5:30 AM - 11:30 AM)',
+    'morning': 'Morning (5:30 AM - 9:30 AM)',
     'evening': 'Evening (4:30 PM - 9:30 PM)'
   };
   return slots[slot] || slot;
+}
+
+// Helper function to format date and time
+function formatDateTime(date) {
+  if (!date) return 'Not specified';
+  const options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true
+  };
+  return new Date(date).toLocaleString('en-US', options);
 }
 
 // Contact form endpoint
@@ -108,9 +123,9 @@ app.post('/api/contact', async (req, res) => {
     email, 
     phone, 
     packageType, 
-    preferredTime, 
     trainingType, 
-    message 
+    message,
+    bookingDate 
   } = req.body;
 
   try {
@@ -132,11 +147,11 @@ app.post('/api/contact', async (req, res) => {
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Phone:</strong> ${phone}</p>
         <p><strong>Package:</strong> ${formatPackageType(packageType)}</p>
-        <p><strong>Preferred Time:</strong> ${formatTimeSlot(preferredTime)}</p>
+        <p><strong>Requested Date/Time:</strong> ${formatDateTime(bookingDate)}</p>
         <p><strong>Training Focus:</strong> ${formatTrainingFocus(trainingType)}</p>
         ${message ? `<p><strong>Additional Information:</strong></p><p>${message}</p>` : ''}
         <br>
-        <p>Please contact the client to discuss package details and schedule their first session.</p>
+        <p>Please contact the client to confirm their booking for the requested date and time.</p>
       `
     });
 
@@ -148,11 +163,11 @@ app.post('/api/contact', async (req, res) => {
       html: `
         <h2>Thank you for choosing Avengers Gym!</h2>
         <p>Dear ${name},</p>
-        <p>We're excited to help you start your fitness journey! Our team will contact you shortly at ${phone} to discuss your training preferences and schedule your first session.</p>
-        <h3>Your Inquiry Details:</h3>
+        <p>We're excited to help you start your fitness journey! Our team will contact you shortly at ${phone} to confirm your booking details.</p>
+        <h3>Your Booking Details:</h3>
         <ul>
           <li><strong>Selected Package:</strong> ${formatPackageType(packageType)}</li>
-          <li><strong>Preferred Time:</strong> ${formatTimeSlot(preferredTime)}</li>
+          <li><strong>Requested Date/Time:</strong> ${formatDateTime(bookingDate)}</li>
           <li><strong>Training Focus:</strong> ${formatTrainingFocus(trainingType)}</li>
         </ul>
         ${message ? `<p><strong>Your Additional Information:</strong></p><p>${message}</p>` : ''}
@@ -165,7 +180,7 @@ app.post('/api/contact', async (req, res) => {
         </ul>
         <p>Gym Hours:</p>
         <ul>
-          <li>Morning: 5:30 AM - 11:30 AM</li>
+          <li>Morning: 5:30 AM - 9:30 AM</li>
           <li>Evening: 4:30 PM - 9:30 PM</li>
         </ul>
         <br>

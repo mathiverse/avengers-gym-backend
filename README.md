@@ -68,7 +68,7 @@ In development, the server uses Ethereal Email for testing:
 ## Operating Hours
 
 The gym operates in two sessions:
-- Morning: 5:30 AM - 11:30 AM
+- Morning: 5:30 AM - 9:30 AM
 - Evening: 4:30 PM - 9:30 PM
 
 ## Package Types
