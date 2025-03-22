@@ -36,4 +36,15 @@ pids
 .npm
 
 # Optional eslint cache
-.eslintcache 
+.eslintcache
+
+# Netlify
+.netlify
+.netlify/
+
+# Local .env file
+.env
+
+# Build directories
+dist/
+build/ 
