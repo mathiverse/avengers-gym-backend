@@ -5,9 +5,17 @@ const nodemailer = require('nodemailer');
 
 const app = express();
 
-// Middleware
+// CORS configuration for production
 app.use(cors({
-  origin: '*', // We'll update this after deployment with specific domains
+  // Allow requests from specific domains
+  origin: [
+    'https://avengers-gym.netlify.app', // Main frontend domain
+    'https://avengers-fitness.netlify.app', // Alternative frontend domain
+    'http://localhost:3000',              // For local development
+    'http://localhost:4000',              // Additional local port
+    'http://localhost:5173',              // Vite default port
+    'http://localhost:5174'               // Alternative Vite port
+  ],
   methods: ['GET', 'POST'],
   credentials: true
 }));
