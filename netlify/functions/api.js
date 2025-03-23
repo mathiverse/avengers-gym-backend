@@ -100,7 +100,7 @@ function formatDateTime(date) {
 }
 
 // Contact form endpoint
-app.post('/contact', async (req, res) => {
+app.post('/api/contact', async (req, res) => {
   console.log('Received booking inquiry:', req.body);
   const { 
     name, 
@@ -190,7 +190,7 @@ app.get('/', (req, res) => {
   res.status(200).json({ 
     message: 'Avengers Gym API is running!',
     endpoints: [
-      { path: '/contact', method: 'POST', description: 'Submit booking inquiry' },
+      { path: '/api/contact', method: 'POST', description: 'Submit booking inquiry' },
       { path: '/health', method: 'GET', description: 'Health check' }
     ]
   });
